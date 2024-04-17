@@ -7,7 +7,6 @@ id | unit | AIDS code | COMMAND (param) | description
 011 | dam | BCK | MOVE BACKWARD (x) |
 012 | deg | LFT | TURN LEFT (x) |
 013 | deg | RGT | TURN RIGHT (x)
-014 | | SHT | SHOOT | fires the finger
 020 | | LHT | LIGHT (x) | sets light configuration to preset x
 021 | | LTP | LIGHT (program??) | maybe we can get more specific with lights idk
 069 | | FLW | FOLLOW ME | follows the april tag (safe, trust me)
