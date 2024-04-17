@@ -1,8 +1,11 @@
 # Assembly-Inspired Diction System:
 
-id | unit | AIDS code | COMMAND (param) | description
+id | unit | AIDS code | COMMAND (param?) | description
 ---|---|---|---|---
 000 | | STP | E-STOP | runtime command, triggers emergency stop
+001 | | NXT | NEXT COMMAND | "next command" tag, unless we find a consistent way to read
+007 | | BEL | BELL | \*ding\*
+009 | | EOF | END OF FILE | run specified commands
 010 | dam | FWD | MOVE FORWARD (x) |
 011 | dam | BCK | MOVE BACKWARD (x) |
 012 | deg | LFT | TURN LEFT (x) |
@@ -20,4 +23,4 @@ id | unit | AIDS code | COMMAND (param) | description
 107 | | DG7 | DIGIT 7
 108 | | DG8 | DIGIT 8
 109 | | DG9 | DIGIT 9
-587 | | EOF | END OF FILE | run specified commands <!-- last april tag -->
+587 | | DEL | DELETE | delete last command <!-- last april tag -->
