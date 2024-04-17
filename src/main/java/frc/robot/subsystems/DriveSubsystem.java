@@ -21,6 +21,6 @@ class DriveSubsystem extends SubsystemBase {
     }
 
     public void drive() {
-        System.out.println("I'm driving :)");
+        System.out.println("I'm driving (:");
     }
 }
