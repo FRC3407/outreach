@@ -1,6 +1,7 @@
 id | param | ASM | command (param unit)
 ---|---|---|---
-0000 | | STP | STOP
+0000 | | STP | E-STOP; runtime
+9999 | | EOF | END OF FILE
 0100 | | DG0 | DIGIT 0
 0101 | | DG1 | DIGIT 1
 0102 | | DG2 | DIGIT 2
@@ -12,8 +13,8 @@ id | param | ASM | command (param unit)
 0108 | | DG8 | DIGIT 8
 0109 | | DG9 | DIGIT 9
 0069 | | FLW | FOLLOW ME
-0010 | xxxx | FWD | FORWARD (cm)
-0011 | xxxx | BCK | BACKWARD (cm)
+0010 | xxxxx | FWD | FORWARD (dam)
+0011 | xxxxx | BCK | BACKWARD (dam)
 0012 | xxx | LFT | TURN LEFT (deg)
 0013 | xxx | RGT | TURN RIGHT (deg)
 0020 | xxxx | LHT | LIGHT (preset)
