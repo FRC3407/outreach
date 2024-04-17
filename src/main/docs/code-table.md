@@ -1,3 +1,5 @@
+# Assembly-Inspired Diction System:
+
 id | param | ASM | command
 ---|---|---|---
 000 | | STP | E-STOP; runtime
