@@ -17,12 +17,12 @@ public class DriveSubsystem extends SubsystemBase {
     MotorControllerGroup left = new MotorControllerGroup(leftA, leftB);
     MotorControllerGroup right = new MotorControllerGroup(rightA, rightB);
     
-    DifferentialDrive driveControler = new DifferentialDrive(left, right);  
+    DifferentialDrive driveController = new DifferentialDrive(left, right);  
     public DriveSubsystem() {
         
     }
 
     public void arcadeDrive(double speed, double rotation) {
-        driveControler.arcadeDrive(speed, rotation);
+        driveController.arcadeDrive(speed, rotation);
     }
 }
