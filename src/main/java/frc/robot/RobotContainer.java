@@ -12,12 +12,14 @@ import edu.wpi.first.wpilibj2.command.Commands;
 public class RobotContainer {
   DriveSubsystem driving = new DriveSubsystem(); 
   XboxController xbox = new XboxController(0); 
-  
+
   public RobotContainer() {
     configureBindings();
   }
 
-  private void configureBindings() {}
+  private void configureBindings() {
+    
+  }
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
