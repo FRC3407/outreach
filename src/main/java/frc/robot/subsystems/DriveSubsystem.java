@@ -22,7 +22,7 @@ public class DriveSubsystem extends SubsystemBase {
         
     }
 
-    public void drive(double speed, double rotation) {
+    public void arcadeDrive(double speed, double rotation) {
         driveControler.arcadeDrive(speed, rotation);
     }
 }
