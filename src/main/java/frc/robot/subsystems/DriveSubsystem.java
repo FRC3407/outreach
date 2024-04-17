@@ -19,7 +19,7 @@ public class DriveSubsystem extends SubsystemBase {
     
     DifferentialDrive driveControler = new DifferentialDrive(left, right);  
     public DriveSubsystem() {
-        
+        left.setInverted(true);
     }
 
     public void arcadeDrive(double speed, double rotation) {
