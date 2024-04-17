@@ -1,21 +1,22 @@
 id | param | ASM | command (param unit)
 ---|---|---|---
-0000 | | STP | E-STOP; runtime
-9999 | | EOF | END OF FILE
-0100 | | DG0 | DIGIT 0
-0101 | | DG1 | DIGIT 1
-0102 | | DG2 | DIGIT 2
-0103 | | DG3 | DIGIT 3
-0104 | | DG4 | DIGIT 4
-0105 | | DG5 | DIGIT 5
-0106 | | DG6 | DIGIT 6
-0107 | | DG7 | DIGIT 7
-0108 | | DG8 | DIGIT 8
-0109 | | DG9 | DIGIT 9
-0069 | | FLW | FOLLOW ME
-0010 | xxxxx | FWD | FORWARD (dam)
-0011 | xxxxx | BCK | BACKWARD (dam)
-0012 | xxx | LFT | TURN LEFT (deg)
-0013 | xxx | RGT | TURN RIGHT (deg)
-0020 | xxxx | LHT | LIGHT (preset)
-0021 | ? | LTP | LIGHT (program)
+000 | | STP | E-STOP; runtime
+587 | | EOF | END OF FILE
+100 | | DG0 | DIGIT 0
+101 | | DG1 | DIGIT 1
+102 | | DG2 | DIGIT 2
+103 | | DG3 | DIGIT 3
+104 | | DG4 | DIGIT 4
+105 | | DG5 | DIGIT 5
+106 | | DG6 | DIGIT 6
+107 | | DG7 | DIGIT 7
+108 | | DG8 | DIGIT 8
+109 | | DG9 | DIGIT 9
+069 | | FLW | FOLLOW ME
+010 | xxxxx | FWD | FORWARD (dam)
+011 | xxxxx | BCK | BACKWARD (dam)
+012 | xxx | LFT | TURN LEFT (deg)
+013 | xxx | RGT | TURN RIGHT (deg)
+014 | | SHT | SHOOT
+020 | xxxx | LHT | LIGHT (preset)
+021 | ? | LTP | LIGHT (program)
