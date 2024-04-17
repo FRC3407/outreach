@@ -17,7 +17,7 @@ public class RobotContainer {
   public RobotContainer() {
     driving.setDefaultCommand(
       new DriveCommand(
-        () -> xbox.getRightY(), // Speed
+        () -> xbox.getLeftY(), // Speed
         () -> xbox.getLeftX(), // Rotation
         driving
       )
