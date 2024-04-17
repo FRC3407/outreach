@@ -1,7 +1,7 @@
 id | param | ASM | command (param unit)
 ---|---|---|---
 000 | | STP | E-STOP; runtime
-587 | | EOF | END OF FILE
+587 | | EOF | END OF FILE <!-- last april tag -->
 100 | | DG0 | DIGIT 0
 101 | | DG1 | DIGIT 1
 102 | | DG2 | DIGIT 2
