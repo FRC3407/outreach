@@ -19,12 +19,18 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveForwardCommand;
+import frc.robot.commands.TurnCommand;
 
 public class VisionSubsystem extends SubsystemBase {
     public final int TAG_START = 5;
     public final int TAG_CONTINUE = 11;
     public final int TAG_EXECUTE = 35;
     public final int TAG_DRIVE = 492; // the tag that looks like <:P
+    public final int TAG_TURNRIGHT = 3;
+    public final int TAG_TURNLEFT = 15;
+    public final int TAG_SPINLEFT = 62;
+    public final int TAG_SPINRIGHT = 44;
+    public final int TAG_DRIVEBACKWARDS = 166;
 
 
     public DriveSubsystem m_DriveSubsystem;
@@ -49,13 +55,12 @@ public class VisionSubsystem extends SubsystemBase {
         canContinue = false;
         isRunning = false;
         currentTag = 0;
-        idList.add(492L);
+        idList.add(15L);
         m_DriveSubsystem = driveSubsystem;
     }
 
     @Override
     public void periodic() {
-        System.out.println(startAdd + "," + canContinue + "," + idList);
 
         // This method will be called once per scheduler run
         long[] ids = idSub.get();
@@ -95,10 +100,29 @@ public class VisionSubsystem extends SubsystemBase {
             Command nextCommand = null;
             switch (id.intValue()) {
                 case TAG_DRIVE:
-                System.out.println("im shmovin'");
-                    nextCommand = new DriveForwardCommand(1.0, m_DriveSubsystem);
+                    nextCommand = new DriveForwardCommand(false, 1.0, m_DriveSubsystem);
                     break;
-            
+                
+                case TAG_TURNRIGHT:
+                    nextCommand = new TurnCommand(false, 90.0, m_DriveSubsystem);
+                    break;
+
+                case TAG_TURNLEFT:
+                    nextCommand = new TurnCommand(true, 90.0, m_DriveSubsystem);
+                    break;
+
+                case TAG_SPINLEFT:
+                    nextCommand = new TurnCommand(true, 180.0, m_DriveSubsystem);
+                    break;
+
+                case TAG_SPINRIGHT:
+                    nextCommand = new TurnCommand(false, 180.0, m_DriveSubsystem);
+                    break;
+
+                case TAG_DRIVEBACKWARDS:
+                    nextCommand = new DriveForwardCommand(true, 1.0, m_DriveSubsystem);
+                    break;
+
                 default:
                     break;
             }
