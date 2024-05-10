@@ -13,13 +13,11 @@ public class WackyWavyInflatableArmFlailingTubeManSubsystem extends SubsystemBas
 
   DigitalOutput wackyWavyInflatableArmFlailingTubeMan;
   boolean isPulsing;
-  Relay m_relay;
 
   /** Creates a new WackyWavyInflatableArmFlailingTubeMan. */
   public WackyWavyInflatableArmFlailingTubeManSubsystem() {
     wackyWavyInflatableArmFlailingTubeMan = new DigitalOutput(TUBE_MAN_CHANNEL);
     isPulsing = false;
-    m_relay = new Relay(0, Relay.Direction.kForward);
   }
 
   @Override
@@ -32,12 +30,10 @@ public class WackyWavyInflatableArmFlailingTubeManSubsystem extends SubsystemBas
     wackyWavyInflatableArmFlailingTubeMan.set(true);
     System.out.println(wackyWavyInflatableArmFlailingTubeMan.get());
 
-    m_relay.set(Relay.Value.kOn);
   }
   public void stopDance() {
     wackyWavyInflatableArmFlailingTubeMan.set(false);
 
-    m_relay.set(Relay.Value.kOff);
   }
   
 }

@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj2.command.Commands;
 
 public class RobotContainer {
   DriveSubsystem driving = new DriveSubsystem(); 
-  VisionSubsystem vision = new VisionSubsystem(driving);
-  XboxController xbox = new XboxController(0); 
   WackyWavyInflatableArmFlailingTubeManSubsystem wacky = new WackyWavyInflatableArmFlailingTubeManSubsystem();
+  VisionSubsystem vision = new VisionSubsystem(driving, wacky);
+  XboxController xbox = new XboxController(0); 
   
   public RobotContainer() {
     driving.setDefaultCommand(

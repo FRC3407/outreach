@@ -13,12 +13,15 @@ import edu.wpi.first.networktables.IntegerArraySubscriber;
 import edu.wpi.first.networktables.IntegerArrayTopic;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveForwardCommand;
+import frc.robot.commands.FlailCommand;
 import frc.robot.commands.TurnCommand;
 
 public class VisionSubsystem extends SubsystemBase {
@@ -31,9 +34,12 @@ public class VisionSubsystem extends SubsystemBase {
     public final int TAG_SPINLEFT = 62;
     public final int TAG_SPINRIGHT = 44;
     public final int TAG_DRIVEBACKWARDS = 166;
+    public final int TAG_WACKYWAVYINFLATEABLEARMFLAILINGTUBEMAN = 189;
+    public final int BUZZER_CHANNEL = 1;
 
 
     public DriveSubsystem m_DriveSubsystem;
+    public WackyWavyInflatableArmFlailingTubeManSubsystem m_WackySubsystem;
     public NetworkTableInstance instance;
     public IntegerArrayTopic topic1;
     public final IntegerArraySubscriber idSub;
@@ -43,10 +49,12 @@ public class VisionSubsystem extends SubsystemBase {
     private boolean canContinue;
     private boolean isRunning;
     private int currentTag;
+    private Timer time;
+    public DigitalOutput buzzer;
 
     // public NetworkTable table;
     /** Creates a new VisionSubsystem. */
-    public VisionSubsystem(DriveSubsystem driveSubsystem) {
+    public VisionSubsystem(DriveSubsystem driveSubsystem, WackyWavyInflatableArmFlailingTubeManSubsystem wackySubystem) {
         instance = NetworkTableInstance.getDefault();
         topic1 = instance.getIntegerArrayTopic("/Vision Server/Pipelines/bv2024/ids");
         idSub = topic1.subscribe(new long[0]);
@@ -57,6 +65,11 @@ public class VisionSubsystem extends SubsystemBase {
         currentTag = 0;
         idList.add(15L);
         m_DriveSubsystem = driveSubsystem;
+        m_WackySubsystem = wackySubystem;
+        buzzer = new DigitalOutput(BUZZER_CHANNEL);
+        time = new Timer();
+        time.start();
+        time.reset();
     }
 
     @Override
@@ -66,6 +79,11 @@ public class VisionSubsystem extends SubsystemBase {
         long[] ids = idSub.get();
         // if (ids.length != 0)
         setTagList();
+        if(whichTagVisible()>-1) {
+            buzz();
+        } else {
+            unbuzz();
+        }
     }
 
     // Search for a tag ID in the tags list
@@ -123,6 +141,9 @@ public class VisionSubsystem extends SubsystemBase {
                     nextCommand = new DriveForwardCommand(true, 1.0, m_DriveSubsystem);
                     break;
 
+                case TAG_WACKYWAVYINFLATEABLEARMFLAILINGTUBEMAN:
+                    nextCommand = new FlailCommand(m_WackySubsystem);
+
                 default:
                     break;
             }
@@ -163,6 +184,17 @@ public class VisionSubsystem extends SubsystemBase {
             System.out.println("TAG SCANNED: " + id);
             canContinue = false;
         }
+    }
+
+    /**
+     * 
+     */
+    public void buzz() {
+            buzzer.set(true); 
+    }
+
+    public void unbuzz() {
+        buzzer.set(false);
     }
 
     // public void onTagVisible(int tagID, Command cmd) { }
