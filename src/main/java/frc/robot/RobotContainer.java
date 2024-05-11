@@ -14,13 +14,15 @@ import frc.robot.commands.SoundCommand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
   DriveSubsystem driving = new DriveSubsystem(); 
-  WackyWavyInflatableArmFlailingTubeManSubsystem wacky = new WackyWavyInflatableArmFlailingTubeManSubsystem();
-  VisionSubsystem vision = new VisionSubsystem(driving, wacky);
-  XboxController xbox = new XboxController(0); 
   SoundSubsystem sound = new SoundSubsystem();
+
+  WackyWavyInflatableArmFlailingTubeManSubsystem wacky = new WackyWavyInflatableArmFlailingTubeManSubsystem();
+  VisionSubsystem vision = new VisionSubsystem(driving, wacky, sound);
+  CommandXboxController xbox = new CommandXboxController(0); 
   
   public RobotContainer() {
     driving.setDefaultCommand(
@@ -34,7 +36,9 @@ public class RobotContainer {
     configureBindings();
   }
 
-  private void configureBindings() {}
+  private void configureBindings() {
+    xbox.a().onTrue(new SoundCommand(sound));
+  }
 
   public Command getAutonomousCommand() {
     return new FlailCommand(wacky);

@@ -21,18 +21,22 @@ public class SoundSubsystem extends SubsystemBase {
     instance = NetworkTableInstance.getDefault();
     NetworkTable table = instance.getTable("Sounds");
     selectorPub = table.getIntegerTopic("Selector").publish();
-    playPub = table.getIntegerTopic("Play").publish();
+    playPub = table.getIntegerTopic("Play1").publish();
   }
 
   @Override
   public void periodic() {
-    send(0);
     // This method will be called once per scheduler run
+    // selectorPub.set(7);
   }
 
   public void send(int selector) {
     selectorPub.set(selector);
     playPub.set(1);
-    // playPub.set(0);
+    System.out.println("aaa");  
+  }
+
+  public void stop() {
+    playPub.set(0);
   }
 }

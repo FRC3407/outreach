@@ -23,6 +23,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveForwardCommand;
 import frc.robot.commands.FlailCommand;
 import frc.robot.commands.TurnCommand;
+import frc.robot.commands.SoundCommand;
 
 public class VisionSubsystem extends SubsystemBase {
     public final int TAG_START = 5;
@@ -39,6 +40,7 @@ public class VisionSubsystem extends SubsystemBase {
 
 
     public DriveSubsystem m_DriveSubsystem;
+    public SoundSubsystem m_SoundSubsystem;
     public WackyWavyInflatableArmFlailingTubeManSubsystem m_WackySubsystem;
     public NetworkTableInstance instance;
     public IntegerArrayTopic topic1;
@@ -54,7 +56,7 @@ public class VisionSubsystem extends SubsystemBase {
 
     // public NetworkTable table;
     /** Creates a new VisionSubsystem. */
-    public VisionSubsystem(DriveSubsystem driveSubsystem, WackyWavyInflatableArmFlailingTubeManSubsystem wackySubystem) {
+    public VisionSubsystem(DriveSubsystem driveSubsystem, WackyWavyInflatableArmFlailingTubeManSubsystem wackySubystem, SoundSubsystem soundSubsystem) {
         instance = NetworkTableInstance.getDefault();
         topic1 = instance.getIntegerArrayTopic("/Vision Server/Pipelines/bv2024/ids");
         idSub = topic1.subscribe(new long[0]);
@@ -66,6 +68,7 @@ public class VisionSubsystem extends SubsystemBase {
         idList.add(15L);
         m_DriveSubsystem = driveSubsystem;
         m_WackySubsystem = wackySubystem;
+        m_SoundSubsystem = soundSubsystem;
         buzzer = new DigitalOutput(BUZZER_CHANNEL);
         time = new Timer();
         time.start();
@@ -74,7 +77,6 @@ public class VisionSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-
         // This method will be called once per scheduler run
         long[] ids = idSub.get();
         // if (ids.length != 0)
@@ -122,19 +124,19 @@ public class VisionSubsystem extends SubsystemBase {
                     break;
                 
                 case TAG_TURNRIGHT:
-                    nextCommand = new TurnCommand(false, 90.0, m_DriveSubsystem);
+                    nextCommand = new TurnCommand(90.0, m_DriveSubsystem);
                     break;
 
                 case TAG_TURNLEFT:
-                    nextCommand = new TurnCommand(true, 90.0, m_DriveSubsystem);
+                    nextCommand = new TurnCommand(-90.0, m_DriveSubsystem);
                     break;
 
                 case TAG_SPINLEFT:
-                    nextCommand = new TurnCommand(true, 180.0, m_DriveSubsystem);
+                    nextCommand = new TurnCommand(180.0, m_DriveSubsystem);
                     break;
 
                 case TAG_SPINRIGHT:
-                    nextCommand = new TurnCommand(false, 180.0, m_DriveSubsystem);
+                    nextCommand = new TurnCommand(-180.0, m_DriveSubsystem);
                     break;
 
                 case TAG_DRIVEBACKWARDS:
